@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vedantu C++ Course — Question Bank & Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fefefe;--surface:#fff;--surface2:#f7f7fa;--surface3:#f0f1f5;
+  --border:#e5e7ed;--border-light:#ecedf2;
+  --text:#1a1d2b;--text-dim:#6b7089;--text-mid:#464a5c;
+  --vedantu-orange:#ff693d;--vedantu-dark:#e85528;--vedantu-light:#fff3ef;
+  --vedantu-green:#22c55e;--vedantu-blue:#3b82f6;
+  --code-bg:#1e1f2b;--code-surface:#262838;--code-border:#333550;--code-text:#d4d8e8;
+  --easy:#22c55e;--easy-bg:#ecfdf5;--easy-border:#bbf7d0;
+  --medium:#f59e0b;--medium-bg:#fffbeb;--medium-border:#fde68a;
+  --hard:#ef4444;--hard-bg:#fef2f2;--hard-border:#fecaca;
+  --radius:10px;
+}
+html{font-size:15px;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;line-height:1.6}
+
+/* ── TOPBAR ── */
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.7rem 2rem;background:#fff;border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:200}
+.topbar-left{display:flex;align-items:center;gap:.7rem}
+.vedantu-logo{
+  font-size:1.35rem;font-weight:800;color:var(--vedantu-orange);letter-spacing:-.03em}
+.vedantu-logo span{color:var(--text);font-weight:600;font-size:.85rem;margin-left:.15rem}
+.topbar-right{display:flex;align-items:center;gap:.8rem}
+.gh-btn{
+  display:inline-flex;align-items:center;gap:.4rem;
+  padding:.4rem .9rem;border-radius:8px;
+  background:var(--text);color:#fff;text-decoration:none;
+  font-size:.78rem;font-weight:600;transition:all .2s}
+.gh-btn:hover{background:#333;transform:translateY(-1px)}
+.gh-btn svg{width:16px;height:16px;fill:#fff}
+
+/* ── HERO ── */
+.hero{
+  padding:2.8rem 2rem 2.2rem;text-align:center;
+  background:linear-gradient(135deg,var(--vedantu-light) 0%,#fff 50%,#f0f7ff 100%);
+  border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.hero::before{
+  content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;
+  border-radius:50%;background:rgba(255,105,61,.06);pointer-events:none}
+.hero::after{
+  content:'';position:absolute;bottom:-40px;left:-40px;width:150px;height:150px;
+  border-radius:50%;background:rgba(59,130,246,.04);pointer-events:none}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.4rem;
+  padding:.3rem .9rem;border-radius:20px;margin-bottom:1rem;
+  background:var(--vedantu-light);border:1px solid rgba(255,105,61,.2);
+  font-size:.72rem;font-weight:600;color:var(--vedantu-orange);
+  font-family:'JetBrains Mono',monospace;letter-spacing:.03em}
+.hero h1{
+  font-size:2rem;font-weight:800;letter-spacing:-.04em;color:var(--text);
+  position:relative;line-height:1.3}
+.hero h1 em{font-style:normal;color:var(--vedantu-orange)}
+.hero p{color:var(--text-dim);margin-top:.5rem;font-size:.92rem;max-width:500px;margin-inline:auto}
+.hero .stats-row{
+  display:flex;gap:1.5rem;justify-content:center;margin-top:1.3rem;flex-wrap:wrap}
+.stat-chip{
+  display:inline-flex;align-items:center;gap:.35rem;
+  padding:.35rem .85rem;border-radius:8px;
+  font-size:.78rem;font-weight:600;color:var(--text-mid);
+  background:#fff;border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.stat-chip .dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.dot-orange{background:var(--vedantu-orange)}
+.dot-green{background:var(--vedantu-green)}
+.dot-blue{background:var(--vedantu-blue)}
+
+/* ── CONTAINER ── */
+.container{max-width:1100px;margin:0 auto;padding:1.8rem 1.5rem 4rem}
+
+/* ── SECTION HEADER ── */
+.section-head{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:1rem;padding-bottom:.7rem;border-bottom:2px solid var(--border-light)}
+.section-head h2{font-size:1.05rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:.5rem}
+.section-head .count{
+  font-family:'JetBrains Mono',monospace;font-size:.68rem;padding:.2rem .55rem;
+  border-radius:6px;background:var(--vedantu-light);color:var(--vedantu-orange);font-weight:600}
+
+/* ── TABLE ── */
+.table-wrap{
+  border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
+  background:var(--surface);box-shadow:0 1px 4px rgba(0,0,0,.04)}
+table{width:100%;border-collapse:collapse}
+thead{background:var(--surface2)}
+thead th{
+  padding:.75rem 1rem;font-size:.68rem;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--text-dim);text-align:left;
+  border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace}
+tbody tr{border-bottom:1px solid var(--border-light);transition:background .15s}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:var(--vedantu-light)}
+tbody td{padding:.65rem 1rem;font-size:.88rem;vertical-align:middle}
+
+.col-id{
+  color:var(--text-dim);font-family:'JetBrains Mono',monospace;font-size:.76rem;
+  width:40px;font-weight:600}
+
+/* problem name + links */
+.prob-name{font-weight:600;color:var(--text);display:block;margin-bottom:.2rem}
+.prob-links{display:flex;gap:.6rem;flex-wrap:wrap}
+.prob-links a{
+  display:inline-flex;align-items:center;gap:.25rem;
+  font-size:.7rem;font-weight:600;text-decoration:none;
+  font-family:'JetBrains Mono',monospace;transition:all .2s}
+.link-ques{color:var(--vedantu-blue)}
+.link-ques:hover{text-decoration:underline}
+.link-sol{color:var(--vedantu-orange)}
+.link-sol:hover{text-decoration:underline}
+
+/* tags */
+.tags{display:flex;flex-wrap:wrap;gap:.3rem}
+.tag{
+  display:inline-block;padding:.12rem .5rem;border-radius:5px;font-size:.66rem;font-weight:600;
+  background:var(--surface3);color:var(--text-mid);
+  font-family:'JetBrains Mono',monospace;letter-spacing:.02em}
+
+/* badges */
+.badge{
+  display:inline-block;padding:.18rem .6rem;border-radius:6px;font-size:.66rem;font-weight:700;
+  letter-spacing:.03em;font-family:'JetBrains Mono',monospace;text-transform:uppercase}
+.badge-easy{background:var(--easy-bg);color:var(--easy);border:1px solid var(--easy-border)}
+.badge-medium{background:var(--medium-bg);color:var(--medium);border:1px solid var(--medium-border)}
+.badge-hard{background:var(--hard-bg);color:var(--hard);border:1px solid var(--hard-border)}
+
+/* ── SOLUTION TOGGLE ── */
+.sol-btn{
+  display:inline-flex;align-items:center;gap:.35rem;
+  padding:.32rem .7rem;border-radius:7px;border:1px solid var(--vedantu-orange);
+  background:var(--vedantu-light);color:var(--vedantu-orange);cursor:pointer;
+  font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:600;
+  transition:all .2s}
+.sol-btn:hover{background:var(--vedantu-orange);color:#fff}
+.sol-btn.active{background:var(--vedantu-orange);color:#fff}
+.sol-btn .arrow{transition:transform .25s;display:inline-block;font-size:.6rem}
+.sol-btn.active .arrow{transform:rotate(90deg)}
+
+/* ── SOLUTION PANEL (DARK) ── */
+.sol-row{display:none}
+.sol-row.open{display:table-row}
+.sol-row td{padding:.5rem 1rem 1rem;background:var(--surface2);border-bottom:1px solid var(--border)}
+.sol-inner{border:1px solid var(--code-border);border-radius:var(--radius);overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.12)}
+
+.sol-toolbar{
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;
+  padding:.5rem .9rem;background:var(--code-surface);border-bottom:1px solid var(--code-border)}
+.sol-lang{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:#8b90a8;letter-spacing:.06em;text-transform:uppercase}
+.toolbar-btns{display:flex;gap:.4rem}
+.tb{
+  padding:.25rem .6rem;border-radius:6px;border:1px solid var(--code-border);
+  background:transparent;color:#8b90a8;cursor:pointer;
+  font-family:'JetBrains Mono',monospace;font-size:.65rem;transition:all .2s}
+.tb:hover{border-color:var(--vedantu-orange);color:var(--vedantu-orange)}
+.tb.run-btn{border-color:var(--vedantu-orange);color:var(--vedantu-orange);background:rgba(255,105,61,.1)}
+.tb.run-btn:hover{background:rgba(255,105,61,.2)}
+
+/* code editor */
+.code-edit{
+  width:100%;min-height:200px;padding:1rem 1.1rem;border:none;outline:none;resize:vertical;
+  font-family:'JetBrains Mono',monospace;font-size:.78rem;line-height:1.7;
+  color:var(--code-text);background:var(--code-bg);tab-size:4;white-space:pre;overflow-x:auto}
+
+/* I/O */
+.io-section{border-top:1px solid var(--code-border);display:flex;flex-wrap:wrap}
+.io-box{flex:1;min-width:200px;border-right:1px solid var(--code-border)}
+.io-box:last-child{border-right:none}
+.io-label{
+  display:block;padding:.4rem .9rem;font-family:'JetBrains Mono',monospace;
+  font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;
+  color:#8b90a8;background:var(--code-surface);border-bottom:1px solid var(--code-border)}
+.io-box textarea,.io-box .output-pre{
+  width:100%;min-height:70px;padding:.6rem .9rem;border:none;outline:none;resize:vertical;
+  font-family:'JetBrains Mono',monospace;font-size:.76rem;line-height:1.6;
+  color:var(--code-text);background:var(--code-bg)}
+.io-box .output-pre{white-space:pre-wrap;word-break:break-all;display:block}
+.output-pre.error{color:#fb7185}
+.output-pre.running{color:#fbbf24}
+
+/* ── FOOTER ── */
+.footer{
+  text-align:center;padding:2rem 1.5rem;color:var(--text-dim);font-size:.78rem;
+  border-top:1px solid var(--border);margin-top:1rem}
+.footer a{color:var(--vedantu-orange);text-decoration:none;font-weight:600}
+.footer a:hover{text-decoration:underline}
+.footer-brand{font-weight:800;color:var(--vedantu-orange);font-size:.9rem;margin-bottom:.3rem}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .topbar{padding:.6rem 1rem}
+  .hero h1{font-size:1.4rem}
+  .container{padding:1rem .6rem 3rem}
+  thead th,tbody td{padding:.55rem .55rem;font-size:.78rem}
+  .code-edit{font-size:.7rem;min-height:150px}
+  .io-section{flex-direction:column}
+  .io-box{border-right:none;border-bottom:1px solid var(--code-border)}
+  .prob-links{flex-direction:column;gap:.2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ TOPBAR ═══ -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="vedantu-logo">Vedantu <span>C++ Course</span></div>
+  </div>
+  <div class="topbar-right">
+    <a class="gh-btn" href="https://github.com/himanshuVdwivedi" target="_blank">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      himanshuVdwivedi
+    </a>
+  </div>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="hero-badge">📘 C++ COURSE · QUESTION BANK</div>
+  <h1>Vedantu C++ Course<br><em>Question Bank & Solutions</em></h1>
+  <p>All course problems with C++ solutions — edit the code and run it live in your browser.</p>
+  <div class="stats-row">
+    <span class="stat-chip"><span class="dot dot-orange"></span> 14 Problems</span>
+    <span class="stat-chip"><span class="dot dot-green"></span> Live C++ Compiler</span>
+    <span class="stat-chip"><span class="dot dot-blue"></span> Question & Solution Links</span>
+  </div>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<div class="container">
+  <div class="section-head">
+    <h2>📋 Problem List</h2>
+    <span class="count">14 solved</span>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Problem & Links</th>
+          <th>Topics</th>
+          <th>Difficulty</th>
+          <th>Solution</th>
+        </tr>
+      </thead>
+      <tbody id="prob-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<div class="footer">
+  <div class="footer-brand">Vedantu C++ Course Solutions</div>
+  Built by <a href="https://github.com/himanshuVdwivedi" target="_blank">himanshuVdwivedi</a> ·
+  Compiler powered by <a href="https://emkc.org" target="_blank">Piston API</a> ·
+  For learning purposes only.
+</div>
+
+<script>
+const GITHUB_BASE = "https://github.com/himanshuVdwivedi/vedantu-cpp-solutions/blob/main/solutions/";
+
+const problems = [
+{
+  name:"Weird Algorithm", link:"https://cses.fi/problemset/task/1068",
+  file:"01_weird_algorithm.cpp",
+  topics:["Loops"], difficulty:"Easy", stdin:"3",
+  code:`#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    long long n;
+    cin >> n;
+    cout << n;
+    while (n != 1) {
+        if (n % 2 == 0)
+            n /= 2;
+        else
+            n = 3 * n + 1;
+        cout << " " << n;
+    }
+    cout << endl;
+    return 0;
+}`
+},
+{
+  name:"Missing Number", link:"https://cses.fi/problemset/task/1083",
+  file:"02_missing_number.cpp",
+  topics:["Loops"], difficulty:"Easy", stdin:"5\n2 3 1 5",
+  code:`#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    long long n;
+    cin >> n;
+    long long total = n * (n + 1) / 2;
+    for (int i = 0; i < n - 1; i++) {
+        long long x;
+        cin >> x;
+        total -= x;
+    }
+    cout << total << endl;
+    return 0;
+}`
+},
+{
+  name:"Repetitions", link:"https://cses.fi/problemset/task/1069",
+  file:"03_repetitions.cpp",
+  topics:["Loops","String"], difficulty:"Easy", stdin:"ATTCGGGA",
+  code:`#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    string s;
+    cin >> s;
+    int maxLen = 1, curLen = 1;
+    for (int i = 1; i < (int)s.size(); i++) {
+        if (s[i] == s[i - 1])
+            curLen++;
+        else
+            curLen = 1;
+        maxLen = max(maxLen, curLen);
+    }
+    cout << maxLen << endl;
+    return 0;
+}`
+},
+{
+  name:"Increasing Array", link:"https://cses.fi/problemset/task/1094",
+  file:"04_increasing_array.cpp",
+  topics:["Loops"], difficulty:"Easy", stdin:"5\n3 2 5 1 7",
+  code:`#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    long long moves = 0, prev = 0;
+    for (int i = 0; i < n; i++) {
+        long long x;
+        cin >> x;
+        if (x < prev)
+            moves += prev - x;
+        else
+            prev = x;
+    }
+    cout << moves << endl;
+    return 0;
+}`
+},
+{
+  name:"Permutations", link:"https://cses.fi/problemset/task/1070",
+  file:"05_permutations.cpp",
+  topics:["Loops","Logic"], difficulty:"Easy", stdin:"5",
+  code:`#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    if (n == 1) {
+        cout << 1 << endl;
+    } else if (n < 4) {
+        cout << "NO SOLUTION" << endl;
+    } else {
+        for (int i = 2; i <= n; i += 2)
+            cout << i << " ";
+        for (int i = 1; i <= n; i += 2)
+            cout << i << " ";
+        cout << endl;
+    }
+    return 0;
+}`
+},
+{
+  name:"Number Spiral", link:"https://cses.fi/problemset/task/1071",
+  file:"06_number_spiral.cpp",
+  topics:["Math"], difficulty:"Hard", stdin:"3\n2 3\n1 1\n4 2",
+  code:`#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        long long y, x;
+        cin >> y >> x;
+        long long layer = max(y, x);
+        long long val;
+        if (layer % 2 == 0) {
+            if (y < x)
+                val = layer * layer - (layer - 1) + (layer - y);
+            else
+                val = (layer - 1) * (layer - 1) + x;
+        } else {
+            if (x < y)
+                val = layer * layer - (layer - 1) + (layer - x);
+            else
+                val = (layer - 1) * (layer - 1) + y;
+        }
+        cout << val << "\\n";
+    }
+    return 0;
+}`
+},
+{
+  name:"Two Knights", link:"https://cses.fi/problemset/task/1072",
+  file:"07_two_knights.cpp",
+  topics:["Math"], difficulty:"Hard", stdin:"8",
+  code:`#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    for (long long k = 1; k <= n; k++) {
+        long long total = k * k;
+        long long allPairs = total * (total - 1) / 2;
+        long long attacks = 0;
+        if (k >= 3)
+            attacks = 4 * (k - 1) * (k - 2);
+        cout << allPairs - attacks << "\\n";
+    }
+    return 0;
+}`
+},
+{
+  name:"Two Sets", link:"https://cses.fi/problemset/task/1092",
+  file:"08_two_sets.cpp",
+  topics:["Math"], difficulty:"Medium", stdin:"7",
+  code:`#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    long long n;
+    cin >> n;
+    long long total = n * (n + 1) / 2;
+    if (total % 2 != 0) {
+        cout << "NO" << endl;
+        return 0;
+    }
+    cout << "YES" << endl;
+    long long target = total / 2;
+    vector<int> s1, s2;
+    for (long long i = n; i >= 1; i--) {
+        if (target >= i) {
+            s1.push_back(i);
+            target -= i;
+        } else {
+            s2.push_back(i);
+        }
+    }
+    cout << s1.size() << "\\n";
+    for (int x : s1) cout << x << " ";
+    cout << "\\n" << s2.size() << "\\n";
+    for (int x : s2) cout << x << " ";
+    cout << endl;
+    return 0;
+}`
+},
+{
+  name:"Bit Strings", link:"https://cses.fi/problemset/task/1617",
+  file:"09_bit_strings.cpp",
+  topics:["Math"], difficulty:"Easy", stdin:"3",
+  code:`#include <bits/stdc++.h>
+using namespace std;
+
+const int MOD = 1e9 + 7;
+
+long long power(long long base, long long exp, long long mod) {
+    long long result = 1;
+    base %= mod;
+    while (exp > 0) {
+        if (exp & 1)
+            result = result * base % mod;
+        base = base * base % mod;
+        exp >>= 1;
+    }
+    return result;
+}
+
+int main() {
+    int n;
+    cin >> n;
+    cout << power(2, n, MOD) << endl;
+    return 0;
+}`
+},
+{
+  name:"Trailing Zeroes", link:"https://cses.fi/problemset/task/1618",
+  file:"10_trailing_zeroes.cpp",
+  topics:["Math"], difficulty:"Easy", stdin:"20",
+  code:`#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    int count = 0;
+    for (long long p = 5; p <= n; p *= 5)
+        count += n / p;
+    cout << count << endl;
+    return 0;
+}`
+},
+{
+  name:"Palindrome Reorder", link:"https://cses.fi/problemset/task/1755",
+  file:"11_palindrome_reorder.cpp",
+  topics:["Array","Strings"], difficulty:"Easy", stdin:"AABBC",
+  code:`#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    string s;
+    cin >> s;
+    int freq[26] = {};
+    for (char c : s) freq[c - 'A']++;
+
+    int oddCount = 0;
+    char oddChar = 0;
+    for (int i = 0; i < 26; i++) {
+        if (freq[i] % 2 != 0) {
+            oddCount++;
+            oddChar = 'A' + i;
+        }
+    }
+    if (oddCount > 1) {
+        cout << "NO SOLUTION" << endl;
+        return 0;
+    }
+    string half = "";
+    for (int i = 0; i < 26; i++)
+        half += string(freq[i] / 2, 'A' + i);
+
+    string result = half;
+    if (oddChar) result += string(freq[oddChar - 'A'] % 2, oddChar);
+    reverse(half.begin(), half.end());
+    result += half;
+    cout << result << endl;
+    return 0;
+}`
+},
+{
+  name:"Creating Strings", link:"https://cses.fi/problemset/task/1622",
+  file:"12_creating_strings.cpp",
+  topics:["Backtracking"], difficulty:"Medium", stdin:"aab",
+  code:`#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    string s;
+    cin >> s;
+    sort(s.begin(), s.end());
+    vector<string> perms;
+    do {
+        perms.push_back(s);
+    } while (next_permutation(s.begin(), s.end()));
+    cout << perms.size() << "\\n";
+    for (auto& p : perms)
+        cout << p << "\\n";
+    return 0;
+}`
+},
+{
+  name:"Apple Division", link:"https://cses.fi/problemset/task/1623",
+  file:"13_apple_division.cpp",
+  topics:["Backtracking","Bitmask"], difficulty:"Medium", stdin:"5\n3 2 7 4 1",
+  code:`#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    vector<long long> a(n);
+    long long total = 0;
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+        total += a[i];
+    }
+    long long minDiff = total;
+    for (int mask = 0; mask < (1 << n); mask++) {
+        long long sum = 0;
+        for (int i = 0; i < n; i++)
+            if (mask & (1 << i))
+                sum += a[i];
+        minDiff = min(minDiff, abs(total - 2 * sum));
+    }
+    cout << minDiff << endl;
+    return 0;
+}`
+},
+{
+  name:"Chessboard and Queens", link:"https://cses.fi/problemset/task/1624",
+  file:"14_chessboard_queens.cpp",
+  topics:["Backtracking"], difficulty:"Medium",
+  stdin:"........\n........\n..*.....\n........\n........\n........\n........\n........",
+  code:`#include <bits/stdc++.h>
+using namespace std;
+
+char board[8][8];
+bool colUsed[8], diag1[16], diag2[16];
+int ans = 0;
+
+void solve(int row) {
+    if (row == 8) { ans++; return; }
+    for (int col = 0; col < 8; col++) {
+        if (board[row][col] == '*') continue;
+        if (colUsed[col] || diag1[row - col + 7] || diag2[row + col])
+            continue;
+        colUsed[col] = diag1[row - col + 7] = diag2[row + col] = true;
+        solve(row + 1);
+        colUsed[col] = diag1[row - col + 7] = diag2[row + col] = false;
+    }
+}
+
+int main() {
+    for (int i = 0; i < 8; i++)
+        for (int j = 0; j < 8; j++)
+            cin >> board[i][j];
+    solve(0);
+    cout << ans << endl;
+    return 0;
+}`
+}
+];
+
+// ═══════════════════════════════════════════════════════════════
+function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+
+const tbody = document.getElementById('prob-body');
+const originalCode = {};
+
+problems.forEach((p, i) => {
+  const dc = p.difficulty.toLowerCase();
+  const id = `p-${i}`;
+  const solUrl = GITHUB_BASE + p.file;
+  originalCode[id] = p.code;
+
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td class="col-id">${String(i+1).padStart(2,'0')}</td>
+    <td>
+      <span class="prob-name">${p.name}</span>
+      <div class="prob-links">
+        <a class="link-ques" href="${p.link}" target="_blank">📝 Question ↗</a>
+        <a class="link-sol" href="${solUrl}" target="_blank">💻 Solution on GitHub ↗</a>
+      </div>
+    </td>
+    <td><div class="tags">${p.topics.map(t=>`<span class="tag">${t}</span>`).join('')}</div></td>
+    <td><span class="badge badge-${dc}">${p.difficulty}</span></td>
+    <td><button class="sol-btn" data-id="${id}"><span class="arrow">▸</span> View & Run</button></td>
+  `;
+  tbody.appendChild(tr);
+
+  const sr = document.createElement('tr');
+  sr.className = 'sol-row';
+  sr.id = `sol-${id}`;
+  sr.innerHTML = `
+    <td colspan="5">
+      <div class="sol-inner">
+        <div class="sol-toolbar">
+          <span class="sol-lang">C++ 17</span>
+          <div class="toolbar-btns">
+            <button class="tb copy-btn" data-id="${id}">📋 Copy</button>
+            <button class="tb" onclick="resetCode('${id}')">↺ Reset</button>
+            <button class="tb run-btn" data-id="${id}">▶ Run Code</button>
+          </div>
+        </div>
+        <textarea class="code-edit" id="code-${id}" spellcheck="false">${escapeHtml(p.code)}</textarea>
+        <div class="io-section">
+          <div class="io-box">
+            <span class="io-label">📥 Input (stdin)</span>
+            <textarea id="stdin-${id}" spellcheck="false">${escapeHtml(p.stdin||'')}</textarea>
+          </div>
+          <div class="io-box">
+            <span class="io-label">📤 Output</span>
+            <pre class="output-pre" id="output-${id}">Click ▶ Run Code to see output...</pre>
+          </div>
+        </div>
+      </div>
+    </td>
+  `;
+  tbody.appendChild(sr);
+});
+
+function resetCode(id){
+  const el=document.getElementById(`code-${id}`);
+  if(el&&originalCode[id])el.value=originalCode[id];
+}
+
+// Toggle
+document.addEventListener('click',e=>{
+  const btn=e.target.closest('.sol-btn');
+  if(!btn)return;
+  const id=btn.dataset.id;
+  const sr=document.getElementById(`sol-${id}`);
+  const isOpen=sr.classList.contains('open');
+  document.querySelectorAll('.sol-row').forEach(r=>r.classList.remove('open'));
+  document.querySelectorAll('.sol-btn').forEach(b=>b.classList.remove('active'));
+  if(!isOpen){sr.classList.add('open');btn.classList.add('active')}
+});
+
+// Copy
+document.addEventListener('click',e=>{
+  const btn=e.target.closest('.copy-btn');
+  if(!btn)return;
+  const code=document.getElementById(`code-${btn.dataset.id}`).value;
+  navigator.clipboard.writeText(code).then(()=>{
+    btn.textContent='✓ Copied!';setTimeout(()=>btn.textContent='📋 Copy',1500);
+  });
+});
+
+// Run — Piston API
+document.addEventListener('click',async e=>{
+  const btn=e.target.closest('.run-btn');
+  if(!btn)return;
+  const id=btn.dataset.id;
+  const code=document.getElementById(`code-${id}`).value;
+  const stdin=document.getElementById(`stdin-${id}`).value;
+  const out=document.getElementById(`output-${id}`);
+  out.className='output-pre running';out.textContent='⏳ Compiling & running...';
+  btn.disabled=true;btn.textContent='⏳ Running...';
+  try{
+    const res=await fetch('https://emkc.org/api/v2/piston/execute',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({language:'cpp',version:'10.2.0',
+        files:[{name:'main.cpp',content:code}],stdin,
+        compile_timeout:10000,run_timeout:5000})});
+    const d=await res.json();
+    if(d.compile&&d.compile.stderr){out.className='output-pre error';out.textContent='❌ Compilation Error:\n'+d.compile.stderr}
+    else if(d.run&&d.run.stderr){out.className='output-pre error';out.textContent='⚠️ Runtime Error:\n'+d.run.stderr+(d.run.stdout?'\n\nOutput:\n'+d.run.stdout:'')}
+    else if(d.run&&d.run.stdout){out.className='output-pre';out.textContent=d.run.stdout}
+    else{out.className='output-pre';out.textContent='(No output)'}
+  }catch(err){
+    out.className='output-pre error';
+    out.textContent='❌ Network error — try again or use:\nhttps://www.onlinegdb.com/online_c++_compiler';
+  }
+  btn.disabled=false;btn.textContent='▶ Run Code';
+});
+
+// Tab key in code editors
+document.addEventListener('keydown',e=>{
+  if(e.key==='Tab'&&e.target.classList.contains('code-edit')){
+    e.preventDefault();const ta=e.target;const s=ta.selectionStart;
+    ta.value=ta.value.substring(0,s)+'    '+ta.value.substring(ta.selectionEnd);
+    ta.selectionStart=ta.selectionEnd=s+4;
+  }
+});
+</script>
+</body>
+</html>
